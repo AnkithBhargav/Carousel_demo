@@ -13,12 +13,37 @@
         }
 
         body {
-            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            background: linear-gradient(120deg, #f8fafc 0%, #e0eafc 60%, #c9d6ff 100%);
+            min-height: 100vh;
+            padding: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
+            align-items: flex-start;
+            position: relative;
+            overflow-x: hidden;
+        }
+        body::before, body::after {
+            content: "";
+            position: absolute;
+            z-index: 0;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.35;
+            pointer-events: none;
+        }
+        body::before {
+            width: 520px;
+            height: 520px;
+            left: -180px;
+            top: -120px;
+            background: radial-gradient(circle, #6d2177 0%, #2980b9 80%, transparent 100%);
+        }
+        body::after {
+            width: 400px;
+            height: 400px;
+            right: -120px;
+            bottom: -80px;
+            background: radial-gradient(circle, #e1bee7 0%, #2980b9 60%, transparent 100%);
         }
 
         .container {
@@ -321,6 +346,17 @@
             pointer-events: none;
             border-radius: 16px 16px 0 0;
             mix-blend-mode: multiply;
+            opacity: 0.85;
+            transition: opacity 0.3s;
+        }
+        @media (max-width: 768px) {
+            .finance-overlay,
+            .travel-overlay,
+            .government-overlay,
+            .healthcare-overlay,
+            .tech-overlay {
+            border-radius: 10px 10px 0 0;
+            }
         }
 
         @media (max-width: 768px) {
