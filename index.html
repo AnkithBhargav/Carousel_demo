@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #f5f5f5;
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -22,29 +22,65 @@
         }
 
         .container {
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
+            max-width: 900px;
+            width: 95%;
+            margin: 40px auto 0 auto;
+            background: rgba(255,255,255,0.85);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(41,128,185,0.10), 0 2px 8px rgba(0,0,0,0.06);
+            padding: 36px 28px 28px 28px;
+            backdrop-filter: blur(2px);
+            transition: box-shadow 0.3s, background 0.3s;
+        }
+        .container:hover {
+            box-shadow: 0 16px 48px rgba(41,128,185,0.18), 0 4px 16px rgba(0,0,0,0.10);
+            background: rgba(255,255,255,0.96);
+        }
+        @media (max-width: 768px) {
+            .container {
+            padding: 18px 6px 12px 6px;
+            border-radius: 14px;
+            }
         }
 
         h1 {
             text-align: center;
             margin-bottom: 40px;
-            font-size: 32px;
-            color: #333;
+            font-size: 38px;
+            color: #2d3a4a;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            background: linear-gradient(90deg, #6d2177 0%, #2980b9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 24px rgba(41,128,185,0.10), 0 1.5px 6px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            padding: 10px 0 14px 0;
+            transition: background 0.4s cubic-bezier(.4,2,.6,1), text-shadow 0.4s cubic-bezier(.4,2,.6,1);
         }
 
         .carousel-container {
             position: relative;
             overflow: hidden;
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-            background: #fff;
-            transition: box-shadow 0.3s ease, border-radius 0.3s ease;
+            border-radius: 22px;
+            box-shadow: 0 12px 40px rgba(41, 128, 185, 0.18), 0 2px 8px rgba(0,0,0,0.08);
+            background: linear-gradient(120deg, #f8fafc 60%, #e0eafc 100%);
+            transition: 
+            box-shadow 0.4s cubic-bezier(.4,2,.6,1),
+            border-radius 0.4s cubic-bezier(.4,2,.6,1),
+            background 0.4s cubic-bezier(.4,2,.6,1);
+            padding-bottom: 18px;
+            backdrop-filter: blur(3px);
         }
         .carousel-container:hover {
-            box-shadow: 0 12px 40px rgba(41, 128, 185, 0.18), 0 2px 8px rgba(0,0,0,0.08);
-            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(41, 128, 185, 0.22), 0 4px 16px rgba(0,0,0,0.12);
+            border-radius: 26px;
+            background: linear-gradient(120deg, #f0f6ff 60%, #e0eafc 100%);
+            transition: 
+            box-shadow 0.3s cubic-bezier(.4,2,.6,1),
+            border-radius 0.3s cubic-bezier(.4,2,.6,1),
+            background 0.3s cubic-bezier(.4,2,.6,1);
         }
 
         .carousel {
@@ -57,6 +93,9 @@
             min-width: 100%;
             position: relative;
             overflow: hidden;
+            transition: box-shadow 0.5s cubic-bezier(.4,2,.6,1), 
+                transform 0.6s cubic-bezier(.4,2,.6,1);
+            will-change: transform, box-shadow;
         }
 
         .carousel-slide img {
@@ -71,6 +110,7 @@
         .carousel-slide:hover img {
             filter: brightness(1) saturate(1.25) contrast(1.12);
             box-shadow: 0 8px 32px rgba(41, 128, 185, 0.18), 0 2px 8px rgba(0,0,0,0.10);
+            transition: filter 0.5s cubic-bezier(.4,2,.6,1), box-shadow 0.5s cubic-bezier(.4,2,.6,1);
         }
 
         .slide-content {
@@ -84,8 +124,20 @@
         }
 
         .slide-content h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
+            font-size: 28px;
+            margin-bottom: 12px;
+            font-weight: 800;
+            letter-spacing: 1.1px;
+            color: #fff;
+            text-shadow: 0 4px 24px rgba(41,128,185,0.18), 0 1.5px 6px rgba(0,0,0,0.14);
+            background: linear-gradient(90deg, #fff 0%, #e1bee7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            border-radius: 8px;
+            padding: 4px 0 6px 0;
+            transition: background 0.4s cubic-bezier(.4,2,.6,1), text-shadow 0.4s cubic-bezier(.4,2,.6,1);
         }
 
         .read-more {
@@ -224,6 +276,10 @@
             .carousel {
                 height: 250px;
             }
+        }
+
+        .my-class {
+            -webkit-text-fill-color: red; /* Correct */
         }
     </style>
 </head>

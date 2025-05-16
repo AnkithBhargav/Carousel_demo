@@ -3,13 +3,23 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(100, 108, 255, 0.08);
 }
 
 .logo {
   height: 6em;
   padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+  will-change: filter, transform;
+  transition: filter 300ms, transform 300ms;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(100, 108, 255, 0.10);
+}
+
+.logo:hover {
+  transform: scale(1.08) rotate(-6deg);
 }
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
@@ -35,8 +45,17 @@
 
 .card {
   padding: 2em;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(100, 108, 255, 0.07);
+  margin: 1.5em auto;
+  max-width: 480px;
 }
 
 .read-the-docs {
   color: #888;
+  font-size: 1.1em;
+  margin-top: 1em;
+  display: block;
+  letter-spacing: 0.02em;
 }

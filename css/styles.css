@@ -2,22 +2,36 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    scroll-behavior: smooth;
 }
 
 body {
-    background-color: #f5f5f5;
+    background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    padding: 20px;
+    padding: 40px 20px;
+    color: #222;
+    transition: background 0.5s;
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1100px;
     width: 100%;
     margin: 0 auto;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(44, 62, 80, 0.15);
+    padding: 40px 32px 32px 32px;
+    backdrop-filter: blur(2px);
+    transition: box-shadow 0.3s, background 0.3s;
+}
+
+.container:hover {
+    box-shadow: 0 12px 40px rgba(44, 62, 80, 0.22);
+    background: rgba(255, 255, 255, 0.95);
 }
 
 h1 {
