@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Industries Carousel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 32px;
+            color: #333;
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            background: #fff;
+            transition: box-shadow 0.3s ease, border-radius 0.3s ease;
+        }
+        .carousel-container:hover {
+            box-shadow: 0 12px 40px rgba(41, 128, 185, 0.18), 0 2px 8px rgba(0,0,0,0.08);
+            border-radius: 20px;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 350px;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px 16px 0 0;
+            box-shadow: 0 4px 24px rgba(41, 128, 185, 0.10), 0 1.5px 6px rgba(0,0,0,0.08);
+            filter: brightness(0.92) saturate(1.15) contrast(1.08);
+            transition: filter 0.4s cubic-bezier(.4,2,.6,1), box-shadow 0.4s cubic-bezier(.4,2,.6,1);
+        }
+        .carousel-slide:hover img {
+            filter: brightness(1) saturate(1.25) contrast(1.12);
+            box-shadow: 0 8px 32px rgba(41, 128, 185, 0.18), 0 2px 8px rgba(0,0,0,0.10);
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+        }
+
+        .slide-content h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 22px;
+            border: 2px solid #fff;
+            border-radius: 30px;
+            color: #fff;
+            background: rgba(255,255,255,0.08);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(41,128,185,0.10);
+            transition: 
+          background 0.3s cubic-bezier(.4,2,.6,1),
+          color 0.3s cubic-bezier(.4,2,.6,1),
+          border 0.3s cubic-bezier(.4,2,.6,1),
+          box-shadow 0.3s cubic-bezier(.4,2,.6,1);
+        }
+
+        .read-more:hover {
+            background-color: white;
+            color: #333;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.5);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            color: #333;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-button:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .carousel-button.prev {
+            left: 10px;
+        }
+
+        .carousel-button.next {
+            right: 10px;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 22px;
+            gap: 12px;
+            padding-bottom: 10px;
+        }
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2980b9 40%, #8e44ad 100%);
+            box-shadow: 0 2px 8px rgba(41,128,185,0.12);
+            opacity: 0.6;
+            border: 2px solid #fff;
+            transition: 
+          background 0.3s cubic-bezier(.4,2,.6,1),
+          opacity 0.3s cubic-bezier(.4,2,.6,1),
+          transform 0.3s cubic-bezier(.4,2,.6,1),
+          box-shadow 0.3s cubic-bezier(.4,2,.6,1);
+        }
+        .dot.active {
+            background: linear-gradient(135deg, #6d2177 0%, #2980b9 100%);
+            opacity: 1;
+            transform: scale(1.18);
+            box-shadow: 0 4px 16px rgba(41,128,185,0.18);
+            border-color: #6d2177;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: #555;
+        }
+
+        /* Gradient overlays for different industry categories */
+        .finance-overlay {
+            background: linear-gradient(120deg, rgba(41,128,185,0.55), rgba(109,33,119,0.45));
+        }
+        .travel-overlay {
+            background: linear-gradient(120deg, rgba(142,68,173,0.55), rgba(41,128,185,0.45));
+        }
+        .government-overlay {
+            background: linear-gradient(120deg, rgba(46,204,113,0.55), rgba(52,152,219,0.45));
+        }
+        .healthcare-overlay {
+            background: linear-gradient(120deg, rgba(231,76,60,0.55), rgba(241,196,15,0.45));
+        }
+        .tech-overlay {
+            background: linear-gradient(120deg, rgba(52,152,219,0.55), rgba(46,204,113,0.45));
+        }
+        .finance-overlay,
+        .travel-overlay,
+        .government-overlay,
+        .healthcare-overlay,
+        .tech-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            border-radius: 16px 16px 0 0;
+            mix-blend-mode: multiply;
+        }
+
+        @media (max-width: 768px) {
+            .slide-content h2 {
+                font-size: 20px;
+            }
+            
+            .carousel {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Industries we Cater to</h1>
+        
+        <div class="carousel-container">
+            <button class="carousel-button prev">&#10094;</button>
+            <div class="carousel">
+                <div class="carousel-slide">
+                    <div class="finance-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+                    <img src="images\image 1.avif" alt="Banking and Financial Services">
+                    <div class="slide-content">
+                        <h2>Banking, Financial Services & Insurance</h2>
+                        <a href="#" class="read-more">Read More &#10095;</a>
+                    </div>
+                </div>
+                
+                <div class="carousel-slide">
+                    <div class="travel-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+                    <img src="images\image 2.avif" alt="Travel Logistics">
+                    <div class="slide-content">
+                        <h2>Travel Logistics</h2>
+                        <a href="#" class="read-more">Read More &#10095;</a>
+                    </div>
+                </div>
+                
+                <div class="carousel-slide">
+                    <div class="government-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+                    <img src="images\images 3.avif" alt="Public Sector & Government">
+                    <div class="slide-content">
+                        <h2>Public Sector & Government</h2>
+                        <a href="#" class="read-more">Read More &#10095;</a>
+                    </div>
+                </div>
+                
+                <div class="carousel-slide">
+                    <div class="healthcare-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+                    <img src="images\images 4.avif" alt="Healthcare & Life Sciences">
+                    <div class="slide-content">
+                        <h2>Healthcare & Life Sciences</h2>
+                        <a href="#" class="read-more">Read More &#10095;</a>
+                    </div>
+                </div>
+                
+                <div class="carousel-slide">
+                    <div class="tech-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+                    <img src="images\image 5.avif" alt="Futuristic workspace with digital devices and glowing data streams representing technology and innovation in a modern collaborative office environment, conveying a sense of progress and creativity">
+                    <div class="slide-content">
+                        <h2>Technology & Innovation</h2>
+                        <a href="#" class="read-more">Read More &#10095;</a>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-button next">&#10095;</button>
+        </div>
+        
+        <div class="carousel-dots"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.querySelector('.carousel');
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dotsContainer = document.querySelector('.carousel-dots');
+            const prevButton = document.querySelector('.carousel-button.prev');
+            const nextButton = document.querySelector('.carousel-button.next');
+            
+            let currentIndex = 0;
+            const slideWidth = 100; // Percentage width
+            
+            // Create dots
+            slides.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(index));
+                dotsContainer.appendChild(dot);
+            });
+            
+            const dots = document.querySelectorAll('.dot');
+            
+            // Initialize carousel
+            updateCarousel();
+            
+            // Event listeners
+            prevButton.addEventListener('click', prevSlide);
+            nextButton.addEventListener('click', nextSlide);
+            
+            // Auto play (optional)
+            let autoPlayInterval = setInterval(nextSlide, 5000);
+            
+            // Pause auto play on hover
+            carousel.addEventListener('mouseenter', () => {
+                clearInterval(autoPlayInterval);
+            });
+            
+            carousel.addEventListener('mouseleave', () => {
+                autoPlayInterval = setInterval(nextSlide, 5000);
+            });
+            
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                updateCarousel();
+            }
+            
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % slides.length;
+                updateCarousel();
+            }
+            
+            function goToSlide(index) {
+                currentIndex = index;
+                updateCarousel();
+            }
+            
+            function updateCarousel() {
+                carousel.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+                
+                // Update active dot
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
